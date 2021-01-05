@@ -20,13 +20,13 @@ pipeline {
 						}
 						stage('SCM Checkout') {
 							steps {
-								sh 'git clone https://github.com/Kari-sad/jenkins.docker.spring.react.selenium_person-database $PWD/spring'
+								sh 'git clone https://github.com/Kari-sad/jenkins.docker.spring.react.selenium_person-database ./spring'
 							}
 						}
 						stage('Compile-Package-Test') {
 							steps {
 								script {
-									dir('$PWD/spring/webservice') {
+									dir('./spring/webservice') {
 										sh "mvn spring-boot:run"
 									}
 								}
@@ -51,13 +51,13 @@ pipeline {
 						}
 						stage('SCM Checkout') {
 							steps {
-								sh 'git clone https://github.com/Kari-sad/jenkins.docker.spring.react.selenium_person-database $PWD/react'
+								sh 'git clone https://github.com/Kari-sad/jenkins.docker.spring.react.selenium_person-database ./react'
 							}
 						}
 						stage('Compile-Package-Test') {
 							steps {
 								script {
-									dir('$PWD/react/client') {
+									dir('./react/client') {
 										sh "npm install"
 										sh "npm start"
 									}
@@ -87,14 +87,14 @@ pipeline {
 						stage('SCM Checkout') {
 							steps {
 								script {
-									sh 'git clone https://github.com/Kari-sad/jenkins.docker.spring.react.selenium_person-database $PWD/testing'
+									sh 'git clone https://github.com/Kari-sad/jenkins.docker.spring.react.selenium_person-database ./testing'
 								}
 							}
 						}
 						stage('Compile-Package-Test') {
 							steps {
 								script {
-									dir('$PWD/testing/integration-testing') {
+									dir('./testing/integration-testing') {
 										sh "mvn package -Dmaven.test.failure.ignore=true"
 									}
 								}
